@@ -1,0 +1,5 @@
+[
+  {"id": "A", "from": "Company"},
+  {"id": "B", "from": "Person"},
+  {"id": "C", "from": "Others"}
+]
