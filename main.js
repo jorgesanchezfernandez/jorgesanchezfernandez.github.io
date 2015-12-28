@@ -185,11 +185,10 @@ var Me = React.createClass({
 					   </figure>
 					</div>
 					<div id="meDescription">
-						<p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin nisi a metus vestibulum, vel rutrum neque condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et sem urna. Phasellus eu orci massa. Pellentesque eu efficitur purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In vitae tristique nibh. Nulla ac vulputate nibh, hendrerit sagittis neque.
-
-Fusce pharetra lobortis pellentesque. Ut volutpat velit id laoreet vestibulum. Proin facilisis iaculis lectus, quis fringilla nulla hendrerit vel. Morbi blandit dapibus felis, tempus venenatis felis molestie ac. Vivamus in egestas libero. Fusce vehicula arcu non nisi dignissim volutpat. Donec vestibulum malesuada nunc vel ultrices. Sed libero ante, gravida eget viverra id, pharetra sit amet arcu.
-
-Mauris commodo tellus mauris. Suspendisse rhoncus accumsan consectetur. Donec a dapibus lorem. Vestibulum non ex magna. Donec volutpat justo sit amet ullamcorper congue. Integer efficitur venenatis nulla, vel pharetra est tempus vel. Praesent pulvinar efficitur mauris. Curabitur nisi tellus, hendrerit ut aliquet vitae, viverra et nibh. Sed dictum varius tincidunt. Maecenas a tincidunt libero, eu convallis felis. Nunc nec elit ac mauris gravida dignissim eget at nulla. Proin dictum sem tincidunt, maximus nunc id, commodo sem. </p>
+					  <p>
+					  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
+					  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
+					  </p>
 					</div>
 				</article>
 			</section>	
@@ -340,8 +339,8 @@ var Storage = React.createClass({
 		return(
 			<section data-name="storage" data-active={this.state.sectContentAct}>
 				<article className="pilgrim">
-					<div id="stCodex" className={this.state.itemPilgrim}>
-						<div onClick={this.inactivePilgrim}>X</div>
+					<div id="stCodex" className={this.state.itemPilgrim} data-name="content">
+						<div className="crossButton" onClick={this.inactivePilgrim}>X</div>
 							 <video id="videoCodex" width="420" height="340" controls>
 								  <source src="videos/codex.mp4" type="video/mp4" />
 								  Your browser does not support the video tag.
@@ -349,14 +348,14 @@ var Storage = React.createClass({
 					</div> 
 				</article>
 				<article className="cube">
-					<div id="stCube" className={this.state.itemCube}>
-						<div onClick={this.inactiveCube}>X</div>
+					<div id="stCube" className={this.state.itemCube} data-name="content">
+						<div className="crossButton" onClick={this.inactiveCube}>X</div>
 						<img src="images/cubeImages.png" alt="Cube image"/>
 					</div>
 				</article>
 				<article className="demo">
-					<div id="stDemo" className={this.state.itemDemo}>
-						<div onClick={this.inactiveDemo}>X</div>
+					<div id="stDemo" className={this.state.itemDemo} data-name="content">
+						<div className="crossButton" onClick={this.inactiveDemo}>X</div>
 						<img src="images/demoImages.png" alt="Demoscene image"/>
 					</div>
 				</article>

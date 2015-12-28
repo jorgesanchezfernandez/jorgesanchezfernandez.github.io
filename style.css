@@ -129,6 +129,23 @@ article[data-prop="click"]:hover{
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
+div [data-name="itemWork"]{
+	text-align: center;
+	font: 15px arial, sans-serif;
+	box-shadow: 10px 20px 30px black; 
+}
+
+div [data-name="content"]{
+	padding: 20px;
+	background: #202020;
+	box-shadow: 10px 20px 30px black; 
+	border: 2px solid #808080;
+}
+.crossButton{
+	color: white;
+	font: 15px arial, sans-serif;
+	display:inline-block;
+}
 
 textarea{
 	resize: none;
