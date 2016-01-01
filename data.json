@@ -1,5 +1,4 @@
 [
-  {"id": "A", "from": "Company"},
-  {"id": "B", "from": "Person"},
-  {"id": "C", "from": "Others"}
+  {"id": "Email", "contact": " xhercs@gmail.com ", "image": "images/email.png"},
+  {"id": "LinkedIn", "contact": " uk.linkedin.com/in/jorgesanchezfernandez ", "image": "images/linkedIn.png"}
 ]

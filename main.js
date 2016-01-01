@@ -7,6 +7,22 @@
 //////Canvas component
 var Canvas = React.createClass({
 	
+	//////Initialize states
+	  getInitialState: function () {
+	  	
+			return { 
+						 sectCanvasAct: false,
+						 sectFadeIn: false					
+					 };         
+					 							
+	},
+	
+	//////Activate or inactive section Me state
+	activateHandle: function(bool){
+		this.setState({ sectCanvasAct: bool, sectFadeIn:bool })      //If it's called, get the transfered state
+		
+	},
+	
 	init: function () {
 		
 		var canvas = document.getElementById('myCanvas');
@@ -20,8 +36,8 @@ var Canvas = React.createClass({
 		    for(var i=0;i<3;i++){
 		      for(var j=0;j<3;j++){
 		        ctx.beginPath();
-		        var x = Math.floor((Math.random() * 50)*(i+1) + 45); // x coordinate
-		        var y = Math.floor((Math.random() * 50)*(j+1) + 40); // y coordinate
+		        var x = Math.floor((Math.random() * 80)*(i+1) + 45); // x coordinate
+		        var y = Math.floor((Math.random() * 80)*(j+1) + 40); // y coordinate
 		        var radius = Math.floor((Math.random() * 30) + 25);  // Arc radius
 		        var radius1 = Math.floor((Math.random() * 18) + 15); 
 		        var radius2 = Math.floor((Math.random() * 10) + 7); 
@@ -57,7 +73,15 @@ var Canvas = React.createClass({
 	render: function(){		
 			
 			return (
-					<canvas width="400" height="400" id="myCanvas">Your browser does not support canvas</canvas>			
+			<section data-fadein={this.state.sectFadeIn}>
+				<p className="divInfo">Canvas Demo</p>
+				<section data-active={this.state.sectCanvasAct} data-fadeIn={this.state.sectFadeIn}>
+					<article>
+						<canvas width="240" height="240" id="myCanvas">Your browser does not support canvas</canvas>
+					</article>
+					<button className="clear" onClick={this.init}>Click me!</button>
+				</section>
+			</section>		
 			);					
 		}	
 
@@ -72,7 +96,9 @@ var Nav = React.createClass({
 			          menuAct: false ,          //Menu activate or inactivate
 						 btnMeAct: false,          //Button activate or inactivate
 						 btnWorkAct: false,        //Button activate or inactivate
-						 btnContactAct: false		//Button activate or inactivate			 
+						 btnCanvasDemo:false,		//Button activate or inactivate	
+						 btnContactAct: false,		//Button activate or inactivate		 
+						 btnCVAct:false
 					 };
 											
 		},
@@ -83,14 +109,18 @@ var Nav = React.createClass({
 			this.setState({ menuAct: !this.state.menuAct,   //If clicked get opposite state
 								 btnMeAct: false,        			//Inactive button
 								 btnWorkAct: false,      			//Inactive button
-								 btnContactAct: false   			//Inactive button
+								 btnCanvasDemo:false,				//Inactive button
+								 btnContactAct: false,   			//Inactive button
+								 btnCVAct:false
 							  })		
 							  
 			meRender.activateHandle(false);			//Inactive id="Me"
 			workRender.activateHandle(false);      //Inactive id="Work"
-			contactRender.activateHandle(false);   //Inactive id="Contact"	
-			storageRender.inactiveAll();
+			contactRender.activateHandle(false);
+			initCanvas.activateHandle(false);
+			workRender.inactiveAll();
 			initCanvas.init();
+
 		},
 
 		//////If About me was clicked
@@ -100,29 +130,70 @@ var Nav = React.createClass({
 			{
 				this.setState({ btnMeAct: true,        //Active button
 									 btnWorkAct: false,     //Inactive button
-									 btnContactAct: false	//inactive button
+									 btnCanvasDemo:false,	//Inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:false
 								  })
 								  
 				meRender.activateHandle(true);			  //Active id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
-				contactRender.activateHandle(false);   //Inactive id="Contact"
-				storageRender.inactiveAll();
+				contactRender.activateHandle(false);
+				initCanvas.activateHandle(false);
+				workRender.inactiveAll();
+				window.location.hash = '#me';
+
 			} 
 		},
-		
 		//////If My Work was clicked
 		goWork: function () {
 			if (!this.state.btnWorkAct)					//Do if it's not already actived
 			{	
 				this.setState({ btnWorkAct: true,      //Active button
 				    				 btnMeAct: false,       //Inactive button
-									 btnContactAct: false	//inactive button
+				    				 btnCanvasDemo:false,	//Inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:false
 				              })
 				              
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(true);       //Active id="Work"
-				contactRender.activateHandle(false);   //Inactive id="Contact"
-				storageRender.inactiveAll();
+				contactRender.activateHandle(false);
+				initCanvas.activateHandle(false);
+				workRender.inactiveAll();
+				window.location.hash = '#work';
+			}
+		},
+		
+		//////If My canvas demo was clicked
+		goCanvas: function () {
+			if (!this.state.btnCanvasAct)					//Do if it's not already actived
+			{	
+				this.setState({ btnCanvasDemo:true,		//Active button
+									 btnWorkAct: false,     //Inactive button
+				    				 btnMeAct: false,       //Inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:false
+				              })
+				              
+				meRender.activateHandle(false);        //Inactive id="Me"
+				workRender.activateHandle(false);       //Active id="Work"
+				contactRender.activateHandle(false);
+				initCanvas.activateHandle(true);
+				workRender.inactiveAll();
+				window.location.hash = '#canvas';
+			}
+		},
+		
+		goCV: function () {
+			if (!this.state.btnCVAct)					//Do if it's not already actived
+			{	
+				this.setState({ btnCanvasDemo:false,		//Inactive button
+									 btnWorkAct: false,     //Inactive button
+				    				 btnMeAct: false,       //Inactive button
+									 btnContactAct: false,	//inactive button
+									 btnCVAct:true
+				              })
+
 			}
 		},
 		
@@ -132,14 +203,18 @@ var Nav = React.createClass({
 			if (!this.state.btnContactAct)             //Do if it's not already actived
 			{
 				this.setState({ btnContactAct: true,    //Active button
-									 btnMeAct: false,        //Active button
-									 btnWorkAct: false      //Inactive button
+									 btnMeAct: false,        //Inactive button
+									 btnCanvasDemo:false,	 //Inactive button
+									 btnWorkAct: false,       //Inactive button
+									 btnCVAct:false
 								  })
 								  
 				meRender.activateHandle(false);        //Inactive id="Me"
 				workRender.activateHandle(false);      //Inactive id="Work"
-				contactRender.activateHandle(true);   //Active id="Contact"
-				storageRender.inactiveAll();
+				contactRender.activateHandle(true);
+				initCanvas.activateHandle(false);
+				workRender.inactiveAll();
+				window.location.hash = '#contact';
 			}
 				 
 		},
@@ -151,9 +226,12 @@ var Nav = React.createClass({
 			return (
 					<ul>
 						<li onClick={this.goHome}><img src="images/menu.png" /></li>
-    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>About Me</li>
-						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>My Work</li>
+    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>About Me</li>	
+						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>Visualisation</li>
+						<a id="aMenu"href="JorgeSanchezCV.pdf" download><li data-menu={menuActName} data-active={this.state.btnCVAct} onClick={this.goCV}>Download CV</li></a>
+						<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Canvas Demo</li>
 						<li data-menu={menuActName} data-active={this.state.btnContactAct} onClick={this.goContact}>Contact Me</li>
+
 					</ul>
 			);		
 		}		
@@ -165,33 +243,39 @@ var Me = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectMeAct: false };         //Section id="Me" activate or inactivate
+			return {  sectMeAct: false, 	//Section id="Me" activate or inactivate
+						 sectFadeIn: false					
+					 };         
 					 							
 	},
 	
 	//////Activate or inactive section Me state
 	activateHandle: function(bool){
-		this.setState({ sectMeAct: bool })      //If it's called, get the transfered state
+		this.setState({ sectMeAct: bool,sectFadeIn:bool })      //If it's called, get the transfered state
+		
 	},
 
 	render: function(){	
 		
 		return (
-			<section data-active={this.state.sectMeAct}>
-				<article id="aboutMe">
-					<div id="photo">
-					   <figure>
-					   	<img src="images/me.png" alt=""/> 
-					   </figure>
-					</div>
-					<div id="meDescription">
-					  <p>
-					  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
-					  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
-					  </p>
-					</div>
-				</article>
-			</section>	
+			<section data-fadein={this.state.sectFadeIn}>
+				<p className="divInfo">About me</p>
+				<section data-active={this.state.sectMeAct}>
+					<article id="aboutMe">
+						<div id="photo">
+						   <figure>
+						   	<img src="images/me.png" alt=""/> 
+						   </figure>
+						</div>
+						<div id="meDescription">
+						  <p>
+						  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
+						  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
+						  </p>
+						</div>
+					</article>
+				</section>	
+			</section>
 		);		
 	}		
 });
@@ -202,168 +286,158 @@ var Work = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectWorkAct: false	};         //Section id="Work" activate or inactivate
+			return {  sectWorkAct: false, //Section id="Work" activate or inactivate
+						 itemPilgrim: "item-out",
+						 itemCube: "item-out",
+						 itemDemo: "item-out",
+						 sectContentAct: false,
+						 sectFadeIn: false
+					};         
 					 							
 	},
 	
 	//////Activate or inactive section Work state
 	activateHandle: function(bool){
 
-		this.setState({ sectWorkAct: bool })     //If it's called, get the transfered state		
-	},
-
-
-	render: function(){	
-		
-		return (
-			<section id="work" data-name="prog" data-active={this.state.sectWorkAct}>
-				<article clasName="pilgrim" data-prop="click" onClick={storageRender.activePilgrim}>
-					<div className="placeholder" data-name="itemWork">
-						<p>Codex</p>
-					   <figure><img src="images/codex.png" alt=""/>
-							<figcaption>El codex en ceiec
-							</figcaption>		   
-					   </figure>
-					</div>
-				</article>
-				<article className="cube" data-prop="click" onClick={storageRender.activeCube}>
-					<div className="placeholder" data-name="itemWork">
-						 <p>cube</p>
-						 <figure><img src="images/cube.png" alt=""/>
-								<figcaption>Cube en ceiec
-								</figcaption>		   
-						   </figure>	
-					</div>
-				</article>
-				<article className="demo" data-prop="click" onClick={storageRender.activeDemo}>
-					<div className="placeholder" data-name="itemWork">
-						<p>Demoscene</p>
-						<figure><img src="images/demo.png" alt=""/>
-							<figcaption>Timescratchers demos
-							</figcaption>		   
-					   </figure>
-					</div>		
-				</article>
-			</section>
-		);
-			
-	}		
-});
-
-var Storage = React.createClass({
-	
-	//////Initialize states
-	  getInitialState: function () {
-	  	
-			return {  itemPilgrim: "item-out",
-						 itemCube: "item-out",
-						 itemDemo: "item-out",
-						 sectContentAct: false												
-												 };         //Section id="Work" activate or inactivate
-					 							
+		this.setState({ sectWorkAct: bool, sectFadeIn: bool })     //If it's called, get the transfered state		
 	},
 	
 	//////Activate items
 	activePilgrim: function(){
 		
-		workRender.activateHandle(false);
+		this.activateHandle(false);
 		this.setState({
 							itemPilgrim: "item-in", 
 							sectContentAct: true
-						  });
+						  })
 	},
+	
 	activeCube: function(){
 		
-		workRender.activateHandle(false);
+		this.activateHandle(false);
 		this.setState({ 		
 		 					itemCube: "item-in" , 
 		 					sectContentAct: true 
-		 				  });
+		 				  })
 	},
+	
 	activeDemo: function(){
 		
-		workRender.activateHandle(false);
+		this.activateHandle(false);
 		this.setState({							 
 							itemDemo: "item-in", 
 							sectContentAct: true
-						  });
+						  })
 	},
 	
 	//////Inactive items
 	inactivePilgrim: function(){
 		
-		workRender.activateHandle(true);
+		this.activateHandle(true);
 		this.setState({
 							itemPilgrim: "item-out", 
 							sectContentAct: false
-						  });
+						  })
 		var video = document.getElementById("videoCodex");
 		video.pause();
 		
 	},
+	
 	inactiveCube: function(){
 		
-		workRender.activateHandle(true);
+		this.activateHandle(true);
 		this.setState({
 							itemCube: "item-out", 
 							sectContentAct: false
-						  });	
+						  })
 	},
+	
 	inactiveDemo: function(){
 		
-		workRender.activateHandle(true);
+		this.activateHandle(true);
 		this.setState({ 
 							itemDemo: "item-out", 
 							sectContentAct: false
-						  });
+						  })
 	},
 	
 	inactiveAll: function(){
 		this.setState({
 							itemPilgrim: "item-out", 
-							sectContentAct: false
-						  });
-		var video = document.getElementById("videoCodex");
-		video.pause();
-		this.setState({
-							itemCube: "item-out", 
-							sectContentAct: false
-						  });
-		this.setState({ 
+							itemCube: "item-out",
 							itemDemo: "item-out", 
 							sectContentAct: false
-						  });
-	},
-	
-	render: function(){	
-		return(
-			<section data-name="storage" data-active={this.state.sectContentAct}>
-				<article className="pilgrim">
-					<div id="stCodex" className={this.state.itemPilgrim} data-name="content">
-						<div className="crossButton" onClick={this.inactivePilgrim}>X</div>
-							 <video id="videoCodex" width="420" height="340" controls>
-								  <source src="videos/codex.mp4" type="video/mp4" />
-								  Your browser does not support the video tag.
-							 </video> 
-					</div> 
-				</article>
-				<article className="cube">
-					<div id="stCube" className={this.state.itemCube} data-name="content">
-						<div className="crossButton" onClick={this.inactiveCube}>X</div>
-						<img src="images/cubeImages.png" alt="Cube image"/>
-					</div>
-				</article>
-				<article className="demo">
-					<div id="stDemo" className={this.state.itemDemo} data-name="content">
-						<div className="crossButton" onClick={this.inactiveDemo}>X</div>
-						<img src="images/demoImages.png" alt="Demoscene image"/>
-					</div>
-				</article>
-			</section>
+						  })
+		var video = document.getElementById("videoCodex");
+		video.pause();
 
-		);	
-	}
+	},
+
+	render: function(){	
+		
+		return (
+				<section id="visualisation" data-fadein={this.state.sectFadeIn}>
+					<p className="divInfo">Visualization Work</p>
+					<section data-name="prog" data-active={this.state.sectWorkAct}>
+						<article clasName="pilgrim" data-prop="click" onClick={this.activePilgrim}>
+							<div className="placeholder" data-name="itemWork">
+								<p>Codex</p>
+							   <figure><img src="images/codex.png" alt=""/>
+									<figcaption>El codex en ceiec
+									</figcaption>		   
+							   </figure>
+							</div>
+						</article>
+						<article className="cube" data-prop="click" onClick={this.activeCube}>
+							<div className="placeholder" data-name="itemWork">
+								 <p>cube</p>
+								 <figure><img src="images/cube.png" alt=""/>
+										<figcaption>Cube en ceiec
+										</figcaption>		   
+								   </figure>	
+							</div>
+						</article>
+						<article className="demo" data-prop="click" onClick={this.activeDemo}>
+							<div className="placeholder" data-name="itemWork">
+								<p>Demoscene</p>
+								<figure><img src="images/demo.png" alt=""/>
+									<figcaption>Timescratchers demos
+									</figcaption>		   
+							   </figure>
+							</div>		
+						</article>
+					</section>
+
+					<section data-name="storage" data-active={this.state.sectContentAct}>
+						<article className="pilgrim">
+							<div id="stCodex" className={this.state.itemPilgrim} data-name="content">
+								<div className="crossButton" onClick={this.inactivePilgrim}>X</div>
+									 <video id="videoCodex" width="420" height="340" controls>
+										  <source src="videos/codex.mp4" type="video/mp4" />
+										  Your browser does not support the video tag.
+									 </video> 
+							</div> 
+						</article>
+						<article className="cube">
+							<div id="stCube" className={this.state.itemCube} data-name="content">
+								<div className="crossButton" onClick={this.inactiveCube}>X</div>
+								<img src="images/cubeImages.png" alt="Cube image"/>
+							</div>
+						</article>
+						<article className="demo">
+							<div id="stDemo" className={this.state.itemDemo} data-name="content">
+								<div className="crossButton" onClick={this.inactiveDemo}>X</div>
+								<img src="images/demoImages.png" alt="Demoscene image"/>
+							</div>
+						</article>
+					</section>
+				</section>
+
+		);
+			
+	}		
 });
+
 
 ///// About Contact section
 var Contact = React.createClass({
@@ -371,13 +445,13 @@ var Contact = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectContactAct: false, data: [] };         //Section id="Contact" activate or inactivate
+			return {  sectContactAct: false, data: [],sectFadeIn: false };         //Section id="Contact" activate or inactivate
 					 							
 	},
 	
 	//////Activate or inactive section Work state
 	activateHandle: function(bool){
-		this.setState({ sectContactAct: bool })      //If it's called, get the transfered state
+		this.setState({ sectContactAct: bool, sectFadeIn: bool })      //If it's called, get the transfered state
 	},
 	
 	componentDidMount: function() {
@@ -397,19 +471,12 @@ var Contact = React.createClass({
 	render: function(){
 		
 		return (
-			<section data-active={this.state.sectContactAct}>
-				<article id="contactMe">
-					 <form method="post" action="mailto:xhercs@gmail.com">
-						<p>Please enter your name:</p>
-						<input type="text" name="name"/>
-						<p>E-mail:</p>
-  						<input type="email" name="email"/><br></br>
-  							 <ValueList data={this.state.data} /><br></br>
-						  <textarea name="textarea" rows="10" cols="31">Write your message</textarea> <br></br>
-						<input type="submit" value="Send email"/>
-					</form> 		
-				</article>
-			</section>	
+			<section data-fadein={this.state.sectFadeIn}>
+				<p className="divInfo">Contact me</p>
+				<section data-active={this.state.sectContactAct}>
+	  					<ValueList data={this.state.data} /><br></br>	
+				</section>	
+			</section>
 		);		
 	}		
 });
@@ -417,34 +484,32 @@ var Contact = React.createClass({
 var ValueList = React.createClass({
   render: function() {
     var dataNodes = this.props.data.map(function(values) {
-	      return (	       
-				    <option value={values.id}>{values.from}</option>
+	      return (		    	
+
+						<div className="inline">
+							<p>{values.id}</p>
+						   <figure><img src={values.image} alt=""/>
+								<figcaption>{values.contact}
+								</figcaption>		   
+						   </figure>
+						</div>
+
 	      );
 	 });
     return (
-      	<select>
+		<article id="contactMe" className="myContact">
   				{dataNodes}
-  			</select>
+  		</article>
     );
   }
 });
 
-///// About Footer section
-var Foot = React.createClass({
-						
-	render: function(){
-		return (
-				<p>Jorge Sánchez Fernández Portfolio</p>
-		);		
-	}		
-});
 
 /////Render functions
 var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
 ReactDOM.render(<Nav/>,document.getElementById("menu"));
 var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
-var storageRender = ReactDOM.render(<Storage/>,document.getElementById("storage"));
+
 var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
 var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
 
-ReactDOM.render(<Foot/>,document.getElementById("footmain"));

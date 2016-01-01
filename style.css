@@ -3,16 +3,111 @@
     padding: 0;
 }
 
+html, body {
+ 	height: 100%;
+ 	margin: 0;
+}
+
+div {
+	min-height: 100%; 
+	position: relative;
+
+}
+
+/*
+* Main screen
+*/
+#main{
+    background: url(images/fondo.jpg) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#mainName{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 30%;
+	width: 50%;
+   margin: -5% 0 0 -25%;
+   text-align: center;
+   font-family: Helvetica, Arial, serif;
+   color: white;
+   text-shadow: 2px 2px black;
+ }
+
+p.divInfo{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 30%;
+	width: 50%;
+   margin: -18% 0 0 -25%;
+   text-align: center;
+   font-family: Helvetica, Arial, serif;
+   font-size: 50px;
+   font-weight: bold;
+   color: black;
+}
+
+h1{
+  font-size: 4em;
+}
+
+#me{
+    background: url(images/me.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+#work{
+    background: url(images/dna.png) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#contact{
+    background: url(images/contact.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#canvas{
+    background: url(images/canvas.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+/*
+* Menu
+*/
+header{
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}
+    
 ul{
     list-style-type: none;
     margin: 0;
     padding: 3px;
     overflow: hidden;
     border: 1px solid #0066FF;
-    background: blue; /* For browsers that do not support gradients */    
-    background: -moz-linear-gradient(right, blue, white); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, blue , white); /* Standard syntax (must be last) */
-    box-shadow: 10px 10px 5px #888888
+    background-color: rgba(0, 78, 220, 0.8);   
+    -webkit-box-shadow: 1px 1px 15px 1px rgba(0,0,0,0.62);
+	 -moz-box-shadow: 1px 1px 15px 1px rgba(0,0,0,0.62);
+	 box-shadow: 1px 1px 15px 1px rgba(0,0,0,0.62);
+
 }
 
 li{
@@ -25,7 +120,7 @@ li{
     text-decoration: none;
     border: 2px solid white;
     border-radius: 5px;
-	 -webkit-transition: all 0.5s ease-in-out; /* Chrome, Safari, Opera */
+	 -webkit-transition: all 0.5s ease-in-out; 
     transition: all 0.5s ease-in-out;
 }
 
@@ -35,35 +130,40 @@ li:hover {
     box-shadow: 10px 20px 30px black;   
 }
 
-/*Hides the menu with a animation*/
+
 li[data-menu=menuActfalse]{
 	-webkit-transform: translate(0,-10em);
     transform: translate(0,-10em);
 }
 
-/*Shows the menu with a animation*/
+
 li[data-menu=menuActtrue]{
 	-webkit-transform: translate(0em,0);
     transform: translate(0em,0);
 }
 
-/*Paints active button*/
+
 li[data-active=true]
 {
-	background-color: #F7FE2E;
-	color: black;
+	border-color: yellow;
+	color: yellow;
 }
-/*No paints inactive button*/
+
 li[data-active=false]
 {
-	background-color: blue;
+	background-color: rgba(0, 78, 220, 0.8);   
 	color: white;
+}
+a#aMenu{
+	text-decoration: none;
+	color: white;
+	border-style: hidden;
 }
 
 section{
 	 display: block;
-	-webkit-transition: all 0.5s ease-in-out; /* Chrome, Safari, Opera */
-    transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.75s ease-in-out; 
+    transition: all 0.75s ease-in-out;
 }
 
 article{
@@ -72,27 +172,28 @@ article{
 		border-radius: 25px;
 		margin: 2px;
 		background: rgba(0, 78, 220, 0.8);
-		-webkit-transition: all 0.5s ease-in-out; /* Chrome, Safari, Opera */
+		-webkit-transition: all 0.5s ease-in-out; 
       transition: all 0.5s ease-in-out;
 }
 
-/*Shows section*/
+
 section[data-active=true]{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+	position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -20%;
+	transform: translate(-50%, -50%)
 }
 
-/*Hides section*/
+
 section[data-active=false]{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-90em, -50%);
+	position: absolute;
+   top: 50%;
+   left: 50%;
+
+	transform: translate(-200em, -50%)
 }
+
 /*Shows section*/
 section[data-name="prog"][data-active=true]{
   position: absolute;
@@ -132,7 +233,6 @@ article[data-prop="click"]:hover{
 div [data-name="itemWork"]{
 	text-align: center;
 	font: 15px arial, sans-serif;
-	box-shadow: 10px 20px 30px black; 
 }
 
 div [data-name="content"]{
@@ -141,6 +241,21 @@ div [data-name="content"]{
 	box-shadow: 10px 20px 30px black; 
 	border: 2px solid #808080;
 }
+
+article.myContact{
+		display: inline-block;
+		text-align: center;
+		border-radius: 25px;
+		padding: 12px;
+		box-shadow: 10px 20px 30px black; 
+		border: 2px solid #808080;
+		background-color: rgba(224,224,224,0.8); 
+}
+
+.clear{
+	display: block;
+}
+
 .crossButton{
 	color: white;
 	font: 15px arial, sans-serif;
@@ -156,10 +271,28 @@ textarea{
     bottom: 0;
     width: 98.5%;
     padding: 10px;
-	 background-color: blue;
+	 background-color: rgba(0, 78, 220, 0.8);
 	 color: white;
 }
 
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+section[data-fadein=true] {
+    opacity:0;  /* make things invisible upon start */
+    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
+
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+
+    -webkit-animation-duration:1s;
+    -moz-animation-duration:1s;
+    animation-duration:1s;
+}
 
 
 
