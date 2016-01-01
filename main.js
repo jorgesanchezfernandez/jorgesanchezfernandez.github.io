@@ -269,6 +269,8 @@ var Me = React.createClass({
 						</div>
 						<div id="meDescription">
 						  <p>
+						  I am a software engineer with over three years of experience in front-end development, two years of experience in video games development and research, and four years of experience in desktop applications. 
+						  My domain of professional activity ranges from customers in private companies and public health institutions.
 						  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
 						  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
 						  </p>
