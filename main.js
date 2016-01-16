@@ -41,7 +41,8 @@ var Work = React.createClass({
 	  	
 			return { 
 						visiblePilgrim: "on", visibleDemo1:"on",
-						visibleVideo: "off" , visibleDemo2:"off"
+						visibleVideo: "off" , visibleDemo2:"off",
+						visiblePresentation:"off"
 					 };         
 					 							
 	},
@@ -49,9 +50,9 @@ var Work = React.createClass({
 	//Change pilgrim visibility status
 	changeStatePilgrim: function () {
 		if (this.state.visiblePilgrim === "on"){
-			this.setState({ visiblePilgrim: "off", visibleVideo: "on" })	
+			this.setState({ visiblePilgrim: "off", visibleVideo: "on", visiblePresentation: "off" })	
 		}else {
-			this.setState({ visiblePilgrim: "on", visibleVideo: "off" })
+			this.setState({ visiblePilgrim: "on", visibleVideo: "off", visiblePresentation: "off" })
 			var video = document.getElementById("videoCodex");
 			video.pause();
 		}
@@ -65,7 +66,12 @@ var Work = React.createClass({
 			this.setState({ visibleDemo1: "on", visibleDemo2: "off" })
 		}
 	},
-
+	
+	//Show presentation of The Pilgrim's codex	
+	showPresentation: function () {
+		this.setState({ visiblePresentation: "on" })
+	},
+	
 	render: function(){	
 		
 		return (
@@ -85,10 +91,13 @@ var Work = React.createClass({
 									  Your browser does not support the video tag.
 								 </video> 
 								 <p><strong>The pilgrim&lsquo;s Codex</strong></p>
-				       		 <p>Cultural videogame</p>
-								 <div className="crossButton" onClick={this.changeStatePilgrim}>Exit video</div>
+								 <div className="underLine" onClick={this.showPresentation}>Further explanation</div>
+								 <div className="underLine" onClick={this.changeStatePilgrim}>Exit</div>
 							</div> 
 					    </div>
+					    <div id="stCodexPresentation" className="col-sm-8" data-show={this.state.visiblePresentation}>
+								<iframe id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="480" height="380" src="https://prezi.com/embed/a0we-um2bvpe/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI0OUVMWjZocVN1dzVacDcrWFd4U2lVT0VRPT0&amp;landing_sign=N_mJzFIFnM5qzYJaS3W3Zqxc1PIo6MbL1ECFeWhlND8"></iframe>					 
+						 </div>
 					    <div className="col-sm-4">
 					      <div className="thumbnail">
 					        <img src="images/cube.png" alt="Cube" width="400" height="300"/>
