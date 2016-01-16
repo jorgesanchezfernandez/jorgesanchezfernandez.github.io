@@ -4,24 +4,120 @@
 //////  HTML5 - CSS3 - JQuery - Canvas     ///////
 //////////////////////////////////////////////////
 
-//////Canvas component
-var Canvas = React.createClass({
+
+
+///// About Me section
+var Me = React.createClass({
 	
+	render: function(){	
+		
+		return (
+			<section>
+				<div className="row">
+		    		<div className="col-sm-8">
+		   		   <h2>About me</h2>
+		  		   	<h4>I am a software engineer with over three years of experience in front-end development, two years of experience in video games development and research, and four years of experience in desktop applications. 
+						  My domain of professional activity ranges from customers in private companies and public health institutions.</h4> 
+		  		   	<p>Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
+						  Leadership skills, flexibility, professionalism, facility to solving problems and passion.</p>
+		 		   </div>
+		  		  <div className="col-sm-4 text-center">
+		    		  	<figure>
+						   	<img src="images/me.png" alt="" id="paintBorderMe"/> 
+						</figure>
+		    		</div>
+		   	</div>
+			</section>
+		);		
+	}		
+});
+
+
+///// About Work section
+var Work = React.createClass({
+
 	//////Initialize states
 	  getInitialState: function () {
 	  	
 			return { 
-						 sectCanvasAct: false,
-						 sectFadeIn: false					
+						visiblePilgrim: "on", visibleDemo1:"on",
+						visibleVideo: "off" , visibleDemo2:"off"
 					 };         
 					 							
 	},
 	
-	//////Activate or inactive section Me state
-	activateHandle: function(bool){
-		this.setState({ sectCanvasAct: bool, sectFadeIn:bool })      //If it's called, get the transfered state
-		
+	//Change pilgrim visibility status
+	changeStatePilgrim: function () {
+		if (this.state.visiblePilgrim === "on"){
+			this.setState({ visiblePilgrim: "off", visibleVideo: "on" })	
+		}else {
+			this.setState({ visiblePilgrim: "on", visibleVideo: "off" })
+			var video = document.getElementById("videoCodex");
+			video.pause();
+		}
 	},
+	
+	//Change demo visibility status
+	changeStateDemo: function () {
+		if (this.state.visibleDemo1 === "on"){
+			this.setState({ visibleDemo1: "off", visibleDemo2: "on" })	
+		}else {
+			this.setState({ visibleDemo1: "on", visibleDemo2: "off" })
+		}
+	},
+
+	render: function(){	
+		
+		return (
+				<section id="visualisation">
+					  <h2>Portfolio</h2>
+					  <h4>Real-time visualisation projects</h4>
+					  <div className="row text-center">
+					    <div className="col-sm-4">
+					      <div className="thumbnail click" data-show={this.state.visiblePilgrim} onClick={this.changeStatePilgrim}>
+					        <img src="images/codex.png" alt="Codex" width="400" height="300" />
+					        <p><strong>The pilgrim&lsquo;s Codex</strong></p>
+					        <p>Cultural videogame</p>
+					      </div>
+					      <div id="stCodex" className="thumbnail" data-show={this.state.visibleVideo}>
+								 <video id="videoCodex" width="375" height="280" controls>
+									  <source src="videos/codex.mp4" type="video/mp4" />
+									  Your browser does not support the video tag.
+								 </video> 
+								 <p><strong>The pilgrim&lsquo;s Codex</strong></p>
+				       		 <p>Cultural videogame</p>
+								 <div className="crossButton" onClick={this.changeStatePilgrim}>Exit video</div>
+							</div> 
+					    </div>
+					    <div className="col-sm-4">
+					      <div className="thumbnail">
+					        <img src="images/cube.png" alt="Cube" width="400" height="300"/>
+					        <p><strong>Cube project</strong></p>
+					        <p>Educative videogame</p>
+					      </div>
+					    </div>
+					    <div className="col-sm-4">
+					      <div className="thumbnail click" data-show={this.state.visibleDemo1} onClick={this.changeStateDemo}>
+					        <img src="images/demo.jpg" alt="Demoscene" width="400" height="300"/>
+					        <p><strong>Demoscene</strong></p>
+					        <p>Real-time rendering process</p>
+					      </div>
+					      <div id="stDemo" className="thumbnail click" data-show={this.state.visibleDemo2} onClick={this.changeStateDemo}>
+									<img src="images/demoImages.png" alt="Demoscene image" width="400" height="300"/>
+									<p><strong>Demoscene</strong></p>
+					        		<p>Real-time rendering process</p>
+							</div>
+					    </div>
+					</div>
+				</section>
+
+		);
+			
+	}		
+});
+
+//////Canvas component
+var Canvas = React.createClass({
 	
 	init: function () {
 		
@@ -73,373 +169,23 @@ var Canvas = React.createClass({
 	render: function(){		
 			
 			return (
-			<section data-fadein={this.state.sectFadeIn}>
-				<p className="divInfo">Canvas Demo</p>
-				<section data-active={this.state.sectCanvasAct} data-fadeIn={this.state.sectFadeIn}>
-					<article>
-						<canvas width="240" height="240" id="myCanvas">Your browser does not support canvas</canvas>
-					</article>
-					<button className="clear" onClick={this.init}>Click me!</button>
-				</section>
+			<section>
+				<div className="row">
+				    <div className="col-sm-4 text-center">
+				      <span className="glyphicon glyphicon-picture logo slideanim"></span>
+				    </div>
+				    <div className="col-sm-8 text-center">
+				      <h2>Canvas Demo</h2><br></br>
+				      <h4 ><canvas width="240" height="240" id="myCanvas" className="paintBorder">Your browser does not support canvas</canvas></h4><br></br>
+				      <p><button className="clear" onClick={this.init}>Click me!</button><br></br>
+				      When you click the button automaticaly redraw the canvas and show another random picture.</p>
+				    </div>
+		  		</div>
 			</section>		
 			);					
 		}	
 
 });
-
-//////Navigation component
-var Nav = React.createClass({
-			
-	  //////Initialize states
-	  getInitialState: function () {
-			return {  
-			          menuAct: false ,          //Menu activate or inactivate
-						 btnMeAct: false,          //Button activate or inactivate
-						 btnWorkAct: false,        //Button activate or inactivate
-						 btnCanvasDemo:false,		//Button activate or inactivate	
-						 btnContactAct: false,		//Button activate or inactivate		 
-						 btnCVAct:false
-					 };
-											
-		},
-				  
-		//////If Menu was clicked
-		goHome: function () {
-			
-			this.setState({ menuAct: !this.state.menuAct,   //If clicked get opposite state
-								 btnMeAct: false,        			//Inactive button
-								 btnWorkAct: false,      			//Inactive button
-								 btnCanvasDemo:false,				//Inactive button
-								 btnContactAct: false,   			//Inactive button
-								 btnCVAct:false
-							  })		
-							  
-			meRender.activateHandle(false);			//Inactive id="Me"
-			workRender.activateHandle(false);      //Inactive id="Work"
-			contactRender.activateHandle(false);
-			initCanvas.activateHandle(false);
-			workRender.inactiveAll();
-			initCanvas.init();
-
-		},
-
-		//////If About me was clicked
-		goMe: function () {
-			
-			if (!this.state.btnMeAct)                 //Do if it's not already actived
-			{
-				this.setState({ btnMeAct: true,        //Active button
-									 btnWorkAct: false,     //Inactive button
-									 btnCanvasDemo:false,	//Inactive button
-									 btnContactAct: false,	//inactive button
-									 btnCVAct:false
-								  })
-								  
-				meRender.activateHandle(true);			  //Active id="Me"
-				workRender.activateHandle(false);      //Inactive id="Work"
-				contactRender.activateHandle(false);
-				initCanvas.activateHandle(false);
-				workRender.inactiveAll();
-				window.location.hash = '#me';
-
-			} 
-		},
-		//////If My Work was clicked
-		goWork: function () {
-			if (!this.state.btnWorkAct)					//Do if it's not already actived
-			{	
-				this.setState({ btnWorkAct: true,      //Active button
-				    				 btnMeAct: false,       //Inactive button
-				    				 btnCanvasDemo:false,	//Inactive button
-									 btnContactAct: false,	//inactive button
-									 btnCVAct:false
-				              })
-				              
-				meRender.activateHandle(false);        //Inactive id="Me"
-				workRender.activateHandle(true);       //Active id="Work"
-				contactRender.activateHandle(false);
-				initCanvas.activateHandle(false);
-				workRender.inactiveAll();
-				window.location.hash = '#work';
-			}
-		},
-		
-		//////If My canvas demo was clicked
-		goCanvas: function () {
-			if (!this.state.btnCanvasAct)					//Do if it's not already actived
-			{	
-				this.setState({ btnCanvasDemo:true,		//Active button
-									 btnWorkAct: false,     //Inactive button
-				    				 btnMeAct: false,       //Inactive button
-									 btnContactAct: false,	//inactive button
-									 btnCVAct:false
-				              })
-				              
-				meRender.activateHandle(false);        //Inactive id="Me"
-				workRender.activateHandle(false);       //Active id="Work"
-				contactRender.activateHandle(false);
-				initCanvas.activateHandle(true);
-				workRender.inactiveAll();
-				window.location.hash = '#canvas';
-			}
-		},
-		
-		goCV: function () {
-			if (!this.state.btnCVAct)					//Do if it's not already actived
-			{	
-				this.setState({ btnCanvasDemo:false,		//Inactive button
-									 btnWorkAct: false,     //Inactive button
-				    				 btnMeAct: false,       //Inactive button
-									 btnContactAct: false,	//inactive button
-									 btnCVAct:true
-				              })
-
-			}
-		},
-		
-		//////If Contact Me was clicked
-		goContact: function () {
-			
-			if (!this.state.btnContactAct)             //Do if it's not already actived
-			{
-				this.setState({ btnContactAct: true,    //Active button
-									 btnMeAct: false,        //Inactive button
-									 btnCanvasDemo:false,	 //Inactive button
-									 btnWorkAct: false,       //Inactive button
-									 btnCVAct:false
-								  })
-								  
-				meRender.activateHandle(false);        //Inactive id="Me"
-				workRender.activateHandle(false);      //Inactive id="Work"
-				contactRender.activateHandle(true);
-				initCanvas.activateHandle(false);
-				workRender.inactiveAll();
-				window.location.hash = '#contact';
-			}
-				 
-		},
-
-		render: function(){
-			//Building data-names
-			var menuActName = "menuAct" + this.state.menuAct;
-			
-			return (
-					<ul>
-						<li onClick={this.goHome}><img src="images/menu.png" /></li>
-    					<li data-menu={menuActName} data-active={this.state.btnMeAct} onClick={this.goMe}>About Me</li>	
-						<li data-menu={menuActName} data-active={this.state.btnWorkAct} onClick={this.goWork}>Visualisation</li>
-						<a id="aMenu"href="JorgeSanchezCV.pdf" download><li data-menu={menuActName} data-active={this.state.btnCVAct} onClick={this.goCV}>Download CV</li></a>
-						<li data-menu={menuActName} data-active={this.state.btnCanvasDemo} onClick={this.goCanvas}>Canvas Demo</li>
-						<li data-menu={menuActName} data-active={this.state.btnContactAct} onClick={this.goContact}>Contact Me</li>
-
-					</ul>
-			);		
-		}		
-});
-
-///// About Me section
-var Me = React.createClass({
-	
-	//////Initialize states
-	  getInitialState: function () {
-	  	
-			return {  sectMeAct: false, 	//Section id="Me" activate or inactivate
-						 sectFadeIn: false					
-					 };         
-					 							
-	},
-	
-	//////Activate or inactive section Me state
-	activateHandle: function(bool){
-		this.setState({ sectMeAct: bool,sectFadeIn:bool })      //If it's called, get the transfered state
-		
-	},
-
-	render: function(){	
-		
-		return (
-			<section data-fadein={this.state.sectFadeIn}>
-				<p className="divInfo">About me</p>
-				<section data-active={this.state.sectMeAct}>
-					<article id="aboutMe">
-						<div id="photo">
-						   <figure>
-						   	<img src="images/me.png" alt=""/> 
-						   </figure>
-						</div>
-						<div id="meDescription">
-						  <p>
-						  I am a software engineer with over three years of experience in front-end development, two years of experience in video games development and research, and four years of experience in desktop applications. 
-						  My domain of professional activity ranges from customers in private companies and public health institutions.
-						  Among my qualities it is worth highlighting  my communication skills, so important in a team, to get and collect ideas and provide the project better quality content.
-						  Leadership skills, flexibility, professionalism, facility to solving problems and passion.
-						  </p>
-						</div>
-					</article>
-				</section>	
-			</section>
-		);		
-	}		
-});
-
-///// About Work section
-var Work = React.createClass({
-	
-	//////Initialize states
-	  getInitialState: function () {
-	  	
-			return {  sectWorkAct: false, //Section id="Work" activate or inactivate
-						 itemPilgrim: "item-out",
-						 itemCube: "item-out",
-						 itemDemo: "item-out",
-						 sectContentAct: false,
-						 sectFadeIn: false
-					};         
-					 							
-	},
-	
-	//////Activate or inactive section Work state
-	activateHandle: function(bool){
-
-		this.setState({ sectWorkAct: bool, sectFadeIn: bool })     //If it's called, get the transfered state		
-	},
-	
-	//////Activate items
-	activePilgrim: function(){
-		
-		this.activateHandle(false);
-		this.setState({
-							itemPilgrim: "item-in", 
-							sectContentAct: true
-						  })
-	},
-	
-	activeCube: function(){
-		
-		this.activateHandle(false);
-		this.setState({ 		
-		 					itemCube: "item-in" , 
-		 					sectContentAct: true 
-		 				  })
-	},
-	
-	activeDemo: function(){
-		
-		this.activateHandle(false);
-		this.setState({							 
-							itemDemo: "item-in", 
-							sectContentAct: true
-						  })
-	},
-	
-	//////Inactive items
-	inactivePilgrim: function(){
-		
-		this.activateHandle(true);
-		this.setState({
-							itemPilgrim: "item-out", 
-							sectContentAct: false
-						  })
-		var video = document.getElementById("videoCodex");
-		video.pause();
-		
-	},
-	
-	inactiveCube: function(){
-		
-		this.activateHandle(true);
-		this.setState({
-							itemCube: "item-out", 
-							sectContentAct: false
-						  })
-	},
-	
-	inactiveDemo: function(){
-		
-		this.activateHandle(true);
-		this.setState({ 
-							itemDemo: "item-out", 
-							sectContentAct: false
-						  })
-	},
-	
-	inactiveAll: function(){
-		this.setState({
-							itemPilgrim: "item-out", 
-							itemCube: "item-out",
-							itemDemo: "item-out", 
-							sectContentAct: false
-						  })
-		var video = document.getElementById("videoCodex");
-		video.pause();
-
-	},
-
-	render: function(){	
-		
-		return (
-				<section id="visualisation" data-fadein={this.state.sectFadeIn}>
-					<p className="divInfo">Visualization Work</p>
-					<section data-name="prog" data-active={this.state.sectWorkAct}>
-						<article clasName="pilgrim" data-prop="click" onClick={this.activePilgrim}>
-							<div className="placeholder" data-name="itemWork">
-								<p>Codex</p>
-							   <figure><img src="images/codex.png" alt=""/>
-									<figcaption>El codex en ceiec
-									</figcaption>		   
-							   </figure>
-							</div>
-						</article>
-						<article className="cube" data-prop="click" onClick={this.activeCube}>
-							<div className="placeholder" data-name="itemWork">
-								 <p>cube</p>
-								 <figure><img src="images/cube.png" alt=""/>
-										<figcaption>Cube en ceiec
-										</figcaption>		   
-								   </figure>	
-							</div>
-						</article>
-						<article className="demo" data-prop="click" onClick={this.activeDemo}>
-							<div className="placeholder" data-name="itemWork">
-								<p>Demoscene</p>
-								<figure><img src="images/demo.png" alt=""/>
-									<figcaption>Timescratchers demos
-									</figcaption>		   
-							   </figure>
-							</div>		
-						</article>
-					</section>
-
-					<section data-name="storage" data-active={this.state.sectContentAct}>
-						<article className="pilgrim">
-							<div id="stCodex" className={this.state.itemPilgrim} data-name="content">
-								<div className="crossButton" onClick={this.inactivePilgrim}>X</div>
-									 <video id="videoCodex" width="420" height="340" controls>
-										  <source src="videos/codex.mp4" type="video/mp4" />
-										  Your browser does not support the video tag.
-									 </video> 
-							</div> 
-						</article>
-						<article className="cube">
-							<div id="stCube" className={this.state.itemCube} data-name="content">
-								<div className="crossButton" onClick={this.inactiveCube}>X</div>
-								<img src="images/cubeImages.png" alt="Cube image"/>
-							</div>
-						</article>
-						<article className="demo">
-							<div id="stDemo" className={this.state.itemDemo} data-name="content">
-								<div className="crossButton" onClick={this.inactiveDemo}>X</div>
-								<img src="images/demoImages.png" alt="Demoscene image"/>
-							</div>
-						</article>
-					</section>
-				</section>
-
-		);
-			
-	}		
-});
-
 
 ///// About Contact section
 var Contact = React.createClass({
@@ -447,15 +193,10 @@ var Contact = React.createClass({
 	//////Initialize states
 	  getInitialState: function () {
 	  	
-			return {  sectContactAct: false, data: [],sectFadeIn: false };         //Section id="Contact" activate or inactivate
+			return {  data: [] };         
 					 							
 	},
-	
-	//////Activate or inactive section Work state
-	activateHandle: function(bool){
-		this.setState({ sectContactAct: bool, sectFadeIn: bool })      //If it's called, get the transfered state
-	},
-	
+		
 	componentDidMount: function() {
     $.ajax({
       url: this.props.url,
@@ -473,11 +214,15 @@ var Contact = React.createClass({
 	render: function(){
 		
 		return (
-			<section data-fadein={this.state.sectFadeIn}>
-				<p className="divInfo">Contact me</p>
-				<section data-active={this.state.sectContactAct}>
-	  					<ValueList data={this.state.data} /><br></br>	
-				</section>	
+			<section>
+				<div className="row">
+					<div className="text-center slideanim">
+						<h2 id="h2Contact">My contact</h2><br></br>
+						<div className="col-sm-2">
+						</div>
+						<ValueList data={this.state.data}/><br></br>
+					</div>
+		  		</div>
 			</section>
 		);		
 	}		
@@ -488,10 +233,10 @@ var ValueList = React.createClass({
     var dataNodes = this.props.data.map(function(values) {
 	      return (		    	
 
-						<div className="inline">
-							<p>{values.id}</p>
+						<div className="col-sm-4 text-center paintBorder">
+							<h4 className="h4Contact">{values.id}</h4>
 						   <figure><img src={values.image} alt=""/>
-								<figcaption>{values.contact}
+								<figcaption><h4 className="h4Contact">{values.contact}</h4>
 								</figcaption>		   
 						   </figure>
 						</div>
@@ -499,7 +244,7 @@ var ValueList = React.createClass({
 	      );
 	 });
     return (
-		<article id="contactMe" className="myContact">
+		<article id="contactMe">
   				{dataNodes}
   		</article>
     );
@@ -508,10 +253,9 @@ var ValueList = React.createClass({
 
 
 /////Render functions
-var initCanvas = ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
-ReactDOM.render(<Nav/>,document.getElementById("menu"));
-var meRender = ReactDOM.render(<Me/>,document.getElementById("me"));
 
-var workRender = ReactDOM.render(<Work/>,document.getElementById("work"));
-var contactRender = ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
+ReactDOM.render(<Me/>,document.getElementById("me"));
+ReactDOM.render(<Work/>,document.getElementById("work"));
+ReactDOM.render(<Canvas/>,document.getElementById("canvas"));
+ReactDOM.render(<Contact url="data.json"/>,document.getElementById("contact"));
 
