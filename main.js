@@ -96,7 +96,7 @@ var Work = React.createClass({
 							</div> 
 					    </div>
 					    <div id="stCodexPresentation" className="col-sm-8" data-show={this.state.visiblePresentation}>
-								<iframe id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="480" height="380" src="https://prezi.com/embed/a0we-um2bvpe/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI0OUVMWjZocVN1dzVacDcrWFd4U2lVT0VRPT0&amp;landing_sign=N_mJzFIFnM5qzYJaS3W3Zqxc1PIo6MbL1ECFeWhlND8"></iframe>					 
+								<iframe id="iframe_container" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" width="480" height="380" src="https://prezi.com/embed/pfmqi8k28fxu/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;landing_data=bHVZZmNaNDBIWnNjdEVENDRhZDFNZGNIUE43MHdLNWpsdFJLb2ZHanI5enpnTHlHMGJDSlJ5Sjg1OXVHYm9QUTNnPT0&amp;landing_sign=aj_PwqfvfsPsLlZNeaJ0YvSbdG6iV3QI_NIlzR5XZws"></iframe>					 
 						 </div>
 					    <div className="col-sm-4">
 					      <div className="thumbnail">
