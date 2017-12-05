@@ -2,7 +2,6 @@
 <html>
     <head>
         <script data-main="app" src="lib/Packages/require-2.3.5/require.js"></script>
-
     </head>
     <body>
         <h1>Hello World</h1>
@@ -13,15 +12,5 @@
                 <like-widget params="value: userRating"></like-widget>
             </li>
         </ul>
-
-        <template id='component-like-widget-template'>
-            <div class="like-or-dislike" data-bind="visible: !chosenValue()">
-                <button data-bind="click: like">Like it</button>
-                <button data-bind="click: dislike">Dislike it</button>
-            </div>
-            <div class="result" data-bind="visible: chosenValue">
-                You <strong data-bind="text: chosenValue"></strong> it
-            </div>
-        </template>
     </body>
 </html>

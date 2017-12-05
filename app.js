@@ -10,6 +10,7 @@ requirejs.config({
     	knockout: 'Packages/knockout-3.4.2/knockout',
     	knockoutReg: 'Packages/knockout-register/main',
     	likeWidget: 'Components/example/component-like-widget',
+    	likeWidgetTemplate: 'text!Components/example/component-like-widget.html',
         app: '../app'
     }
 });
