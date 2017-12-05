@@ -8,7 +8,7 @@ requirejs.config({
     paths: {
     	knockout: 'Packages/knockout-3.4.2/knockout',
     	text: 'Packages/text-2.0.15/text',
-    	knockoutReg: 'Packages/knockout-register/main',
+    	knockoutReg: 'Packages/knockout-reg/main',
     	likeWidget: 'Components/example/component-like-widget',
         app: '../app'
     }
@@ -16,4 +16,4 @@ requirejs.config({
 
 // Start loading the main app file. Put all of
 // your application logic in there.
-requirejs(['knockout','text','knockoutReg','likeWidget','app/view-model/product']);
+requirejs(['knockout','text','knockoutReg','likeWidget','app/viewmodel/product']);
