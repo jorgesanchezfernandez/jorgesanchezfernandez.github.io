@@ -11,7 +11,6 @@ requirejs.config({
     	text: 'Packages/text-2.0.15/text',
     	knockoutReg: 'Packages/knockout-register/main',
     	likeWidget: 'Components/example/component-like-widget',
-    	likeWidgetTemplate: 'text!Components/example/component-like-widget.html',
         app: '../app'
     }
 });
