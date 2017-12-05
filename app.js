@@ -6,8 +6,9 @@
 requirejs.config({
     baseUrl: 'lib',
     paths: {
-    	text: 'Packages/text-2.0.15/text',
     	knockout: 'Packages/knockout-3.4.2/knockout',
+    	domReady: 'Packages/domReady/domReady',
+    	text: 'Packages/text-2.0.15/text',
     	knockoutReg: 'Packages/knockout-register/main',
     	likeWidget: 'Components/example/component-like-widget',
     	likeWidgetTemplate: 'text!Components/example/component-like-widget.html',
