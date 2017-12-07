@@ -18,4 +18,4 @@ requirejs.config({
 });
 
 // Start loading the main app file.
-requirejs(['jquery','bootstrap','knockout','app/view-model/searchModel','searchBarComp','text','register']);
+requirejs(['jquery','knockout','app/view-model/searchModel','searchBarComp','text','register','bootstrap']);
